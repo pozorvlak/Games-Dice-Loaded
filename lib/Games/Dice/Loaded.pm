@@ -1,6 +1,6 @@
 package Games::Dice::Loaded;
 use Moose;
-use List::Util 'max';
+use List::Util qw/max sum/;
 use Carp;
 
 # ABSTRACT: Perl extension to simulate rolling loaded dice
@@ -39,8 +39,9 @@ around BUILDARGS => sub {
 	# scale so average weight is 1
 	my @weights = @_;
 	my $n = scalar @weights;
+	my $scalefactor = $n / sum(@weights);
 	my $i = 0;
-	@weights = map { [$i++, $n * $_] } @weights; 
+	@weights = map { [$i++, $scalefactor * $_] } @weights; 
 	my @small = grep { $_->[1] < 1 } @weights;
 	my @large = grep { $_->[1] >= 1 } @weights;
 	my @dartboard; my @aliases;
@@ -104,6 +105,9 @@ Games::Dice::Loaded - Simulate rolling loaded dice
   my $die = Games::Dice::Loaded->new(1/6, 1/6, 1/2, 1/12, 1/12);
   my $result = $die->roll();
 
+  my $fair_d4 = Games::Dice::Loaded->new(1, 1, 1, 1);
+  $result = $fair_d4->roll();
+
 =head1 DESCRIPTION
 
 C<Games::Dice::Loaded> allows you to simulate rolling arbitrarily-weighted dice
@@ -119,8 +123,9 @@ Distribution|http://www.keithschwarz.com/darts-dice-coins/>.
 
 =item new()
 
-Constructor. Takes as arguments the probabilities of rolling each "side". This
-method constructs the alias table, in O(num_sides) time.
+Constructor. Takes as arguments the probabilities of rolling each "side". If
+the weights given do not sum to 1, they are scaled so that they do. This method
+constructs the alias table, in O(num_sides) time.
 
 =item roll()
 

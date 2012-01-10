@@ -1,4 +1,4 @@
-use Test::More;
+use Test::More 0.88;
 use Games::Dice::Loaded;
 
 # Plato woz ere
