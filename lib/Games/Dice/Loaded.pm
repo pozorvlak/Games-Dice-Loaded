@@ -66,3 +66,68 @@ sub roll {
 
 1;
 
+__END__
+
+=head1 NAME
+
+Games::Dice::Loaded - Simulate rolling loaded dice
+
+=head1 SYNOPSIS
+
+  use Games::Dice::Loaded;
+
+  my $die = Games::Dice::Loaded->new(1/6, 1/6, 1/2, 1/12, 1/12);
+  my $result = $die->roll();
+
+=head1 DESCRIPTION
+
+C<Games::Dice::Loaded> allows you to simulate rolling arbitrarily-weighted dice
+with arbitrary numbers of sides - or, more formally, to model any discrete
+random variable which may take only finitely many values. It does this using
+Vose's elegant I<alias method>, which is described in Keith Schwarz's article
+L<Darts, Dice and Coins|http://www.keithschwarz.com/darts-dice-coins/>.
+
+=head1 METHODS
+
+=over
+
+=item new()
+
+Constructor. Takes as arguments the probabilities of rolling each "side". This
+method constructs the alias table, in O(num_sides) time.
+
+=item roll()
+
+Roll the die. Takes no arguments, returns a number in the range 1 .. num_sides. Takes O(1) time.
+
+=item num_sides()
+
+The number of sides on the die. Read-only.
+
+=back
+
+=head1 AUTHOR
+
+Miles Gould, E<lt>mgould@cpan.orgE<gt>
+
+=head1 CONTRIBUTING
+
+Please fork
+L<the GitHub repository|http://github.com/pozorvlak/Games-Dice-Loaded>.
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2011 by Miles Gould
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself, either Perl version 5.12.4 or,
+at your option, any later version of Perl 5 you may have available.
+
+=head1 SEE ALSO
+
+L<Games::Dice::Advanced>,
+L<Games::Dice::Probability>,
+L<Bot::BasicBot::Pluggable::Module::Dice>,
+L<random>.
+
+=cut
