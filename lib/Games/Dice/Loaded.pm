@@ -5,10 +5,32 @@ use Carp;
 
 # ABSTRACT: Perl extension to simulate rolling loaded dice
 
+# Keith Schwarz's article is lovely and has lots of pretty diagrams and proofs,
+# but unfortunately it's also very long. Here's the tl;dr:
+
+# Draw a bar chart of the probabilities of landing on the various sides, then
+# throw darts at it (by picking X and Y coordinates uniformly at random). If
+# you hit a bar with your dart, choose that side. This works OK, but has very
+# bad worst-case behaviour; fortunately, it's possible to cut up the taller
+# bars and stack them on top of the shorter bars in such a way that the area
+# covered is exactly a (1/n) \* n rectangle. Constructing this rectangular
+# "dartboard" can be done in O(n) time, by maintaining a list of short (less
+# than average height) bars and a list of long bars; add the next short bar to
+# the dartboard, then take enough of the next long bar to fill that slice up to
+# the top. Add the index of the long bar to the relevant entry of the "alias
+# table", then put the remainder of the long bar back into either the list of
+# short bars or the list of long bars, depending on how long it now is.
+
+# Once we've done this, simulating a die roll can be done in O(1) time:
+# Generate the dart's coordinates; which vertical slice
+# did the dart land in, and is it in the shorter bar on the bottom or the
+# "alias" that's been stacked above it?.
+
 has 'dartboard' => ( is => 'ro', isa => 'ArrayRef' );
 has 'aliases' => ( is => 'ro', isa => 'ArrayRef' );
 has 'num_sides' => ( is => 'ro', isa => 'Num' );
 
+# Construct the dartboard and alias table
 around BUILDARGS => sub {
 	my $orig = shift;
 	my $class = shift;
@@ -49,6 +71,7 @@ around BUILDARGS => sub {
 	);
 };
 
+# Roll the die
 sub roll {
 	my ($self) = @_;
 	my $side = int(rand $self->num_sides);
