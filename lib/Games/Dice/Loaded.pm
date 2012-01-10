@@ -21,12 +21,14 @@ use Carp;
 # table", then put the remainder of the long bar back into either the list of
 # short bars or the list of long bars, depending on how long it now is.
 
-# Once we've done this, simulating a die roll can be done in O(1) time:
+# Once we've done this, simulating a dice roll can be done in O(1) time:
 # Generate the dart's coordinates; which vertical slice
 # did the dart land in, and is it in the shorter bar on the bottom or the
 # "alias" that's been stacked above it?.
 
+# Heights of the lower halves of the strips
 has 'dartboard' => ( is => 'ro', isa => 'ArrayRef' );
+# Identities of the upper halves of the strips
 has 'aliases' => ( is => 'ro', isa => 'ArrayRef' );
 has 'num_sides' => ( is => 'ro', isa => 'Num' );
 
@@ -108,7 +110,8 @@ C<Games::Dice::Loaded> allows you to simulate rolling arbitrarily-weighted dice
 with arbitrary numbers of sides - or, more formally, to model any discrete
 random variable which may take only finitely many values. It does this using
 Vose's elegant I<alias method>, which is described in Keith Schwarz's article
-L<Darts, Dice and Coins|http://www.keithschwarz.com/darts-dice-coins/>.
+L<Darts, Dice, and Coins: Sampling from a Discrete
+Distribution|http://www.keithschwarz.com/darts-dice-coins/>.
 
 =head1 METHODS
 
@@ -148,9 +151,26 @@ at your option, any later version of Perl 5 you may have available.
 
 =head1 SEE ALSO
 
+Perl modules for rolling dice:
+L<Games::Dice>,
 L<Games::Dice::Advanced>,
-L<Games::Dice::Probability>,
 L<Bot::BasicBot::Pluggable::Module::Dice>,
 L<random>.
+
+A Perl module for calculating probability distributions for dice rolls:
+L<Games::Dice::Probability>.
+
+Descriptions of the alias method:
+
+=over
+
+=item L<Darts, Dice, and Coins: Sampling from a Discrete
+Distribution|http://www.keithschwarz.com/darts-dice-coins/>
+
+=item L<Data structure for loaded dice?|http://stackoverflow.com/questions/5027757/data-structure-for-loaded-dice> on StackOverflow
+
+=item L<Wikipedia article|http://en.wikipedia.org/wiki/Alias_method>
+
+=back
 
 =cut
