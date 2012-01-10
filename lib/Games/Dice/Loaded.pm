@@ -83,9 +83,9 @@ sub roll {
 		unless defined $dartboard[$side];
 	if ($height > $dartboard[$side]) {
 		my @aliases = @{$self->aliases};
-		return $aliases[$side];
+		return $aliases[$side] + 1;
 	} else {
-		return $side;
+		return $side + 1;
 	}
 }
 
