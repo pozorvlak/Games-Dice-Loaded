@@ -1,5 +1,5 @@
 package Games::Dice::Loaded;
-use Moose;
+use Moose 2.0300;
 use List::Util qw/max sum/;
 use Carp;
 
