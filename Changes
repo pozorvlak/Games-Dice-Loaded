@@ -2,4 +2,16 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+	- Some tests to see that we do actually produce the desired distribution
+
+	- Added Test::Probability, a module for performing these tests
+
+	- More use of statistical language in the docs
+
+	- die() rather than croak()ing on internal consistency errors.
+
 0.001_01  2012-01-10 23:34:43 Europe/London
+
+	- Implementation of the algorithm.
+
+	- Some simple sanity checks.
