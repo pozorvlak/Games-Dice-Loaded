@@ -21,9 +21,9 @@ use List::Util qw/max sum/;
 # short bars or the list of long bars, depending on how long it now is.
 
 # Once we've done this, simulating a dice roll can be done in O(1) time:
-# Generate the dart's coordinates; which vertical slice
-# did the dart land in, and is it in the shorter bar on the bottom or the
-# "alias" that's been stacked above it?.
+# Generate the dart's coordinates; which vertical slice did the dart land in,
+# and is it in the shorter bar on the bottom or the "alias" that's been stacked
+# above it?
 
 # Heights of the lower halves of the strips
 has 'dartboard' => ( is => 'ro', isa => 'ArrayRef' );
