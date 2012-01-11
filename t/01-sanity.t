@@ -14,6 +14,6 @@ for my $i (0 .. 12000) {
 	$rolls[$roll - 1]++;
 }
 
-dist_ok(\@rolls, \@weights, 0.9, "Die rolls match expected distribution");
+dist_ok(\@rolls, \@weights, 0.99, "Die rolls match expected distribution");
 
 done_testing;

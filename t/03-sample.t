@@ -14,6 +14,6 @@ for my $i (0 .. 10000) {
 	$rolls[$roll - 1]++;
 }
 
-dist_ok(\@rolls, \@weights, 0.9, "Loaded d6 matches distribution");
+dist_ok(\@rolls, \@weights, 0.99, "Loaded d6 matches distribution");
 
 done_testing;

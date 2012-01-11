@@ -14,6 +14,6 @@ for my $i (0 .. 4000) {
 	$rolls[$roll - 1]++;
 }
 
-dist_ok(\@rolls, \@weights, 0.9, "Fair d4 is fair");
+dist_ok(\@rolls, \@weights, 0.99, "Fair d4 is fair");
 
 done_testing;
