@@ -1,7 +1,6 @@
 package Games::Dice::Loaded;
 use Moose 2.0300;
 use List::Util qw/max sum/;
-use Carp;
 
 # ABSTRACT: Perl extension to simulate rolling loaded dice
 
@@ -63,9 +62,9 @@ around BUILDARGS => sub {
 	}
 	for my $face (0 .. $n - 1) {
 		my $d = $dartboard[$face];
-		croak("Undefined dartboard for face $face") unless defined $d;
-		croak("Height $d too large for face $face") unless $d <= 1;
-		croak("Height $d too small for face $face") unless $d >= 0;
+		die("Undefined dartboard for face $face") unless defined $d;
+		die("Height $d too large for face $face") unless $d <= 1;
+		die("Height $d too small for face $face") unless $d >= 0;
 	}
 	return $class->$orig(
 		dartboard => \@dartboard,
@@ -80,7 +79,7 @@ sub roll {
 	my $face = int(rand $self->num_faces);
 	my $height = rand 1;
 	my @dartboard = @{$self->dartboard()};
-	croak("Dartboard undefined for face $face")
+	die("Dartboard undefined for face $face")
 		unless defined $dartboard[$face];
 	if ($height > $dartboard[$face]) {
 		my @aliases = @{$self->aliases};
