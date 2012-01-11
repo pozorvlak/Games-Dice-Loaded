@@ -16,7 +16,6 @@ use Carp;
 
 sub chisq {
 	my ($observed, $expected) = @_;
-	local $a;
 	return sum(pairwise {
 		my $denom = $b > 0.5 ? $b : 0.5;
 		($a - $b)**2 / $denom;
