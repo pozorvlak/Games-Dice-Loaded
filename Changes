@@ -2,6 +2,8 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+0.001     2012-01-11 19:17:28 Europe/London
+
 	- Some tests to see that we do actually produce the desired distribution
 
 	- Added Test::Probability, a module for performing these tests
