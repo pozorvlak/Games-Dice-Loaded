@@ -6,7 +6,7 @@ my @weights = (1, 2, 1, 7, 3, 5);
 my $die = Games::Dice::Loaded->new(@weights);
 is($die->num_faces, 6, "Die has six faces");
 
-my @rolls;
+my @rolls = (0) x @weights;
 for my $i (0 .. 10000) {
 	my $roll = $die->sample;
 	cmp_ok($roll, '>=', 1, "Roll >= 1");

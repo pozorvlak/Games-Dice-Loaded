@@ -6,7 +6,7 @@ my @weights = (1, 1, 1, 1);
 my $d4 = Games::Dice::Loaded->new(1, 1, 1, 1);
 is($d4->num_faces, 4, "Fair d4 has four faces");
 
-my @rolls;
+my @rolls = (0) x @weights;
 for my $i (0 .. 4000) {
 	my $roll = $d4->roll;
 	cmp_ok($roll, ">=", 1, "Roll >= 1");
