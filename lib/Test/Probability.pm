@@ -30,7 +30,7 @@ sub fits_distribution {
 	print "Expected: @$dist\n";
 	croak "Size of observed domain does not match size of distribution domain"
 		unless scalar(@$observed) == scalar(@$dist);
-	my $observations = scalar @$observed;
+	my $observations = sum @$observed;
 	my $scalefactor = $observations / (sum @$dist);
 	my @expected = map { $_ * $scalefactor } @$dist;
 	my $chisq = chisq($observed, \@expected);
