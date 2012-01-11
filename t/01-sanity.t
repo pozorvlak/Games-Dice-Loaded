@@ -7,8 +7,8 @@ is $die->num_faces, 5, "Die has one face per weight";
 my @rolls;
 for my $i (0 .. 12000) {
 	my $roll = $die->roll;
-	ok $roll >= 1, "Roll $roll >= 1";
-	ok $roll <= 5, "Roll $roll <= 5";
+	cmp_ok $roll, ">=", 1, "Roll $roll >= 1";
+	cmp_ok $roll, "<=", 5, "Roll $roll <= 5";
 	$rolls[$roll]++;
 }
 print "@rolls\n";

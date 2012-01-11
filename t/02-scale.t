@@ -7,8 +7,8 @@ is($d4->num_faces, 4, "Fair d4 has four faces");
 my @rolls;
 for my $i (0 .. 4000) {
 	my $roll = $d4->roll;
-	ok($roll >= 1, "Roll >= 1");
-	ok($roll <= 4, "Roll <= 4");
+	cmp_ok($roll, ">=", 1, "Roll >= 1");
+	cmp_ok($roll, "<=", 4, "Roll <= 4");
 	$rolls[$roll]++;
 }
 

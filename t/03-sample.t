@@ -7,8 +7,8 @@ is($die->num_faces, 6, "Die has six faces");
 my @rolls;
 for my $i (0 .. 4000) {
 	my $roll = $die->sample;
-	ok($roll >= 1, "Roll >= 1");
-	ok($roll <= 6, "Roll <= 6");
+	cmp_ok($roll, '>=', 1, "Roll >= 1");
+	cmp_ok($roll, '<=', 6, "Roll <= 6");
 	$rolls[$roll]++;
 }
 
