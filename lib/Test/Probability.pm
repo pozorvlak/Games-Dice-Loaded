@@ -26,8 +26,6 @@ sub fits_distribution {
 	my ($observed, $dist, $confidence) = @_;
 	croak "First arg not an array or arrayref" unless ref $observed eq 'ARRAY';
 	croak "Second arg not an array or arrayref" unless ref $dist eq 'ARRAY';
-	print "Observed: @$observed\n";
-	print "Expected: @$dist\n";
 	croak "Size of observed domain does not match size of distribution domain"
 		unless scalar(@$observed) == scalar(@$dist);
 	my $observations = sum @$observed;
@@ -41,8 +39,6 @@ sub fits_distribution {
 
 sub dist_ok {
 	my ($observed, $dist, $confidence, $message) = @_;
-	print "Observed: ".join(" ", @{$observed}) . "\n";
-	print "Expected: ".join(" ", @{$dist}) . "\n";
 	ok(fits_distribution($observed, $dist, $confidence), $message);
 }
 
