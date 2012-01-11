@@ -89,6 +89,8 @@ sub roll {
 	}
 }
 
+*sample = \&roll;
+
 1;
 
 __END__
@@ -128,7 +130,12 @@ constructs the alias table, in O(num_faces) time.
 
 =item roll()
 
-Roll the die. Takes no arguments, returns a number in the range 1 .. num_faces. Takes O(1) time.
+Roll the die. Takes no arguments, returns a number in the range 1 .. num_faces.
+Takes O(1) time.
+
+=item sample()
+
+Synonym for C<roll()>.
 
 =item num_faces()
 
