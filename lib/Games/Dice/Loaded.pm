@@ -112,10 +112,10 @@ Games::Dice::Loaded - Simulate rolling loaded dice
 =head1 DESCRIPTION
 
 C<Games::Dice::Loaded> allows you to simulate rolling arbitrarily-weighted dice
-with arbitrary numbers of faces - or, more formally, to model any discrete
-random variable which may take only finitely many values. It does this using
-Vose's elegant I<alias method>, which is described in Keith Schwarz's article
-L<Darts, Dice, and Coins: Sampling from a Discrete
+with arbitrary numbers of faces - or, more formally, to sample any discrete
+probability distribution which may take only finitely many values. It does this
+using Vose's elegant I<alias method>, which is described in Keith Schwarz's
+article L<Darts, Dice, and Coins: Sampling from a Discrete
 Distribution|http://www.keithschwarz.com/darts-dice-coins/>.
 
 =head1 METHODS
@@ -139,7 +139,8 @@ Synonym for C<roll()>.
 
 =item num_faces()
 
-The number of faces on the die. Read-only.
+The number of faces on the die. More formally, the size of the discrete random
+variable's domain. Read-only.
 
 =back
 
@@ -175,7 +176,9 @@ Descriptions of the alias method:
 
 =over
 
-=item L<Darts, Dice, and Coins: Sampling from a Discrete
+=item Michael Vose, L<A Linear Algorithm For Generating Random Numbers with a Given Distribution|http://web.eecs.utk.edu/~vose/Publications/random.pdf>
+
+=item Keith Schwarz, L<Darts, Dice, and Coins: Sampling from a Discrete
 Distribution|http://www.keithschwarz.com/darts-dice-coins/>
 
 =item L<Data structure for loaded dice?|http://stackoverflow.com/questions/5027757/data-structure-for-loaded-dice> on StackOverflow
