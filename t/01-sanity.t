@@ -1,8 +1,10 @@
 use Test::More 0.88;
+use Test::Probability;
 use Games::Dice::Loaded;
 
 # Plato woz ere
-my $die = Games::Dice::Loaded->new(1/6, 1/6, 1/2, 1/12, 1/12);
+my @weights = (1/6, 1/6, 1/2, 1/12, 1/12);
+my $die = Games::Dice::Loaded->new(@weights);
 is $die->num_faces, 5, "Die has one face per weight";
 my @rolls;
 for my $i (0 .. 12000) {
@@ -11,6 +13,7 @@ for my $i (0 .. 12000) {
 	cmp_ok $roll, "<=", 5, "Roll $roll <= 5";
 	$rolls[$roll]++;
 }
-print "@rolls\n";
+
+dist_ok(@rolls, @weights, 0.9, "Die rolls match expected distribution");
 
 done_testing;
