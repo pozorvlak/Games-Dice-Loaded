@@ -2,7 +2,7 @@ use Test::More 0.88;
 use Games::Dice::Loaded;
 
 my $d4 = Games::Dice::Loaded->new(1, 1, 1, 1);
-is($d4->num_sides, 4, "Fair d4 has four sides");
+is($d4->num_faces, 4, "Fair d4 has four faces");
 
 my @rolls;
 for my $i (0 .. 4000) {

@@ -8,9 +8,9 @@ use Carp;
 # Keith Schwarz's article is lovely and has lots of pretty diagrams and proofs,
 # but unfortunately it's also very long. Here's the tl;dr:
 
-# Draw a bar chart of the probabilities of landing on the various sides, then
+# Draw a bar chart of the probabilities of landing on the various faces, then
 # throw darts at it (by picking X and Y coordinates uniformly at random). If
-# you hit a bar with your dart, choose that side. This works OK, but has very
+# you hit a bar with your dart, choose that face. This works OK, but has very
 # bad worst-case behaviour; fortunately, it's possible to cut up the taller
 # bars and stack them on top of the shorter bars in such a way that the area
 # covered is exactly a (1/n) \* n rectangle. Constructing this rectangular
@@ -30,7 +30,7 @@ use Carp;
 has 'dartboard' => ( is => 'ro', isa => 'ArrayRef' );
 # Identities of the upper halves of the strips
 has 'aliases' => ( is => 'ro', isa => 'ArrayRef' );
-has 'num_sides' => ( is => 'ro', isa => 'Num' );
+has 'num_faces' => ( is => 'ro', isa => 'Num' );
 
 # Construct the dartboard and alias table
 around BUILDARGS => sub {
@@ -61,32 +61,32 @@ around BUILDARGS => sub {
 		$dartboard[$unused->[0]] = 1;
 		$aliases[$unused->[0]] = $unused->[0];
 	}
-	for my $side (0 .. $n - 1) {
-		my $d = $dartboard[$side];
-		croak("Undefined dartboard for side $side") unless defined $d;
-		croak("Height $d too large for side $side") unless $d <= 1;
-		croak("Height $d too small for side $side") unless $d >= 0;
+	for my $face (0 .. $n - 1) {
+		my $d = $dartboard[$face];
+		croak("Undefined dartboard for face $face") unless defined $d;
+		croak("Height $d too large for face $face") unless $d <= 1;
+		croak("Height $d too small for face $face") unless $d >= 0;
 	}
 	return $class->$orig(
 		dartboard => \@dartboard,
 		aliases => \@aliases,
-		num_sides => $n,
+		num_faces => $n,
 	);
 };
 
 # Roll the die
 sub roll {
 	my ($self) = @_;
-	my $side = int(rand $self->num_sides);
+	my $face = int(rand $self->num_faces);
 	my $height = rand 1;
 	my @dartboard = @{$self->dartboard()};
-	croak("Dartboard undefined for side $side")
-		unless defined $dartboard[$side];
-	if ($height > $dartboard[$side]) {
+	croak("Dartboard undefined for face $face")
+		unless defined $dartboard[$face];
+	if ($height > $dartboard[$face]) {
 		my @aliases = @{$self->aliases};
-		return $aliases[$side] + 1;
+		return $aliases[$face] + 1;
 	} else {
-		return $side + 1;
+		return $face + 1;
 	}
 }
 
@@ -111,7 +111,7 @@ Games::Dice::Loaded - Simulate rolling loaded dice
 =head1 DESCRIPTION
 
 C<Games::Dice::Loaded> allows you to simulate rolling arbitrarily-weighted dice
-with arbitrary numbers of sides - or, more formally, to model any discrete
+with arbitrary numbers of faces - or, more formally, to model any discrete
 random variable which may take only finitely many values. It does this using
 Vose's elegant I<alias method>, which is described in Keith Schwarz's article
 L<Darts, Dice, and Coins: Sampling from a Discrete
@@ -123,17 +123,17 @@ Distribution|http://www.keithschwarz.com/darts-dice-coins/>.
 
 =item new()
 
-Constructor. Takes as arguments the probabilities of rolling each "side". If
+Constructor. Takes as arguments the probabilities of rolling each "face". If
 the weights given do not sum to 1, they are scaled so that they do. This method
-constructs the alias table, in O(num_sides) time.
+constructs the alias table, in O(num_faces) time.
 
 =item roll()
 
-Roll the die. Takes no arguments, returns a number in the range 1 .. num_sides. Takes O(1) time.
+Roll the die. Takes no arguments, returns a number in the range 1 .. num_faces. Takes O(1) time.
 
-=item num_sides()
+=item num_faces()
 
-The number of sides on the die. Read-only.
+The number of faces on the die. Read-only.
 
 =back
 

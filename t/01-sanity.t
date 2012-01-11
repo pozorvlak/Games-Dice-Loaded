@@ -3,7 +3,7 @@ use Games::Dice::Loaded;
 
 # Plato woz ere
 my $die = Games::Dice::Loaded->new(1/6, 1/6, 1/2, 1/12, 1/12);
-is $die->num_sides, 5, "Die has one side per weight";
+is $die->num_faces, 5, "Die has one face per weight";
 my @rolls;
 for my $i (0 .. 12000) {
 	my $roll = $die->roll;
