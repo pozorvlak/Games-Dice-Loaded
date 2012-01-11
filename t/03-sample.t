@@ -11,7 +11,7 @@ for my $i (0 .. 10000) {
 	my $roll = $die->sample;
 	cmp_ok($roll, '>=', 1, "Roll >= 1");
 	cmp_ok($roll, '<=', 6, "Roll <= 6");
-	$rolls[$roll]++;
+	$rolls[$roll - 1]++;
 }
 
 dist_ok(\@rolls, \@weights, 0.9, "Loaded d6 matches distribution");

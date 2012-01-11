@@ -11,7 +11,7 @@ for my $i (0 .. 4000) {
 	my $roll = $d4->roll;
 	cmp_ok($roll, ">=", 1, "Roll >= 1");
 	cmp_ok($roll, "<=", 4, "Roll <= 4");
-	$rolls[$roll]++;
+	$rolls[$roll - 1]++;
 }
 
 dist_ok(\@rolls, \@weights, 0.9, "Fair d4 is fair");

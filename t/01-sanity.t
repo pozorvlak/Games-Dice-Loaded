@@ -11,7 +11,7 @@ for my $i (0 .. 12000) {
 	my $roll = $die->roll;
 	cmp_ok $roll, ">=", 1, "Roll $roll >= 1";
 	cmp_ok $roll, "<=", 5, "Roll $roll <= 5";
-	$rolls[$roll]++;
+	$rolls[$roll - 1]++;
 }
 
 dist_ok(\@rolls, \@weights, 0.9, "Die rolls match expected distribution");
