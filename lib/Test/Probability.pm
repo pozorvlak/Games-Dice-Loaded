@@ -62,7 +62,7 @@ Test::Probability - test if results are distributed correctly
   my $confidence = 0.9;
   dist_ok(@results, @probabilities, $confidence,
     "results match expected with confidence $confidence");
-  
+
 =head1 DESCRIPTION
 
 Does your random-number generating function output the distribution you expect?
@@ -71,10 +71,14 @@ confidence interval.
 
 =head1 EXPORTS
 
+=over
+
 =item dist_ok
 
   dist_ok(@results, @probabilities, $confidence,
     "results match probabilities with confidence $confidence");
+
+=back
   
 =head1 AUTHOR
 
